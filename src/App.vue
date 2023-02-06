@@ -4,7 +4,7 @@
     </div>
   <nav class="text-center">    
     <!-- <router-link to="/">Home</router-link> | -->
-    <!-- <router-link to="/starships">Starships</router-link> -->
+    <router-link to="/">Starships</router-link>
   </nav>
   <router-view/>
 </template>
