@@ -1,27 +1,30 @@
 <template>
   <div class="container text-light">
     <div v-for="nave of naves" :key="nave.name" class="bg-grey m-2 p-2">
-      <router-link :to="{name: 'filestarship', params:{id: JSON.stringify(nave)}}" class="text-secondary bg-grey">{{ nave.name.toUpperCase() }}</router-link>
+      <router-link :to="{ name: 'filestarship', params: { id: JSON.stringify(nave) } }"
+        class="text-secondary bg-grey">{{
+          nave.name.toUpperCase()
+        }}</router-link>
       <p class="text-secondary bg-grey">{{ nave.model }}</p>
     </div>
     <router-view />
+    <!-- El botón se muestra mientras hayan más naves que enseñar -->
+    <div class="container text-center" v-show="$store.state.dataNau.next">
+      <button @click="recarga" class="btn btn-outline-secondary">View More</button>
+    </div>
   </div>
 </template>
 
 <script>
 import { computed, onMounted } from 'vue';
-import { useStore } from 'vuex';
+import { mapActions, useStore } from 'vuex';
 import FileStarShip from '@/components/FileStarShip.vue';
+
 
 export default {
   name: 'StarShips',
   components: {
     FileStarShip
-  },
-  data: function () {
-    return {
-
-    }
   },
   setup() {
     // con esto tenemos acceso a nuestro Vuex
@@ -35,6 +38,9 @@ export default {
     // mapeamos el state para mostrar el array en el v-for
     const naves = computed(() => store.state.naves)
     return { naves }
+  },
+  methods: {
+    ...mapActions(['recarga'])
   }
 }
 </script>
