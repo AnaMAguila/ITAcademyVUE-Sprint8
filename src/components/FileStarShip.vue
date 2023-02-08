@@ -79,13 +79,6 @@ export default {
 </script>
 
 <style>
-body {
-  background-image: url("../assets/background.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-}
-
 li {
   list-style: none;
 }

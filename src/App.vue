@@ -1,20 +1,24 @@
 <template>
   <div class="text-center">
     <img alt="Star Wars logo" class="logo" src="@/assets/logo-starwars.png">
-    </div>
-  <nav>    
+  </div>
+  <nav>
     <router-link to="/" class="link">Home</router-link>
-    <router-link to="/" class="link">Starships</router-link>
+    <router-link to="/starships" class="link">Starships</router-link>
   </nav>
-  <router-view/>
+  <router-view />
 </template>
 
 <style>
 body {
-    box-sizing: border-box;
-    background-color: #000;
-    margin: 0;
-    padding: 0;
+  background-image: url("./assets/background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  box-sizing: border-box;
+  background-color: #000;
+  margin: 0;
+  padding: 0;
 }
 
 .logo {
@@ -22,7 +26,7 @@ body {
   margin-top: 20px;
 }
 
-nav{
+nav {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,11 +34,11 @@ nav{
   border-top-width: 2px;
   border-left: none;
   border-right: none;
-  margin-top:20px;
+  margin-top: 20px;
   margin-bottom: 20px;
 }
 
-.link{
+.link {
   border: 1px solid #1f1f1f;
   border-bottom-width: 3px;
   padding: 10px;
@@ -45,9 +49,15 @@ nav{
   color: #666666;
 }
 
-.link:hover{
+.link:hover,
+.link.router-link-active,
+.link.router-link-exact-active {
   border-bottom-color: #0048a0;
   border-bottom-width: 3px;
   color: #fff
+}
+
+.bg-grey {
+  background-color: #151515cb;
 }
 </style>

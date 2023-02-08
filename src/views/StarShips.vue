@@ -2,20 +2,19 @@
   <div class="container text-light">
     <div class="row justify-content-center">
       <div v-for="nave of naves" :key="nave.name" class="bg-grey m-2 p-2 col-8">
-      <router-link :to="{ name: 'filestarship', params: { id: JSON.stringify(nave) } }"
-        class="dato-nave text-decoration-none">
-        {{ nave.name.toUpperCase() }}
-        <p></p>
-        {{ nave.model }}
-      </router-link>
+        <router-link :to="{ name: 'filestarship', params: { id: JSON.stringify(nave) } }"
+          class="dato-nave text-decoration-none">
+          {{ nave.name.toUpperCase() }}
+          <p></p>
+          {{ nave.model }}
+        </router-link>
+      </div>
+      <router-view />
+      <!-- El botón se muestra mientras hayan más naves que enseñar -->
+      <div class="container text-center mb-4 mt-3" v-show="$store.state.dataNau.next">
+        <button @click="recarga" class="btn btn-outline-warning text-uppercase">View More</button>
+      </div>
     </div>
-    <router-view />
-    <!-- El botón se muestra mientras hayan más naves que enseñar -->
-    <div class="container text-center mb-4 mt-3" v-show="$store.state.dataNau.next">
-      <button @click="recarga" class="btn btn-outline-secondary">View More</button>
-    </div>
-    </div>
-    
   </div>
 </template>
 
@@ -49,10 +48,6 @@ export default {
 </script>
 
 <style>
-.bg-grey {
-  background-color: #151515cb;
-}
-
 .dato-nave {
   display: block;
   margin: 10px;
@@ -60,6 +55,6 @@ export default {
 }
 
 .dato-nave:hover {
-  color: #fff;
+  color: #fec007;
 }
 </style>
