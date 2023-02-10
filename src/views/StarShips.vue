@@ -1,6 +1,6 @@
 <template>
   <div class="container text-light">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" v-if="loggedUser.length != 0">
       <div v-for="nave of naves" :key="nave.name" class="bg-grey m-2 p-2 col-8 text-start">
         <router-link :to="{ name: 'filestarship', params: { id: JSON.stringify(nave) } }"
           class="dato-nave text-decoration-none">
@@ -15,6 +15,7 @@
         <button @click="recarga" class="btn btn-outline-warning text-uppercase">View More</button>
       </div>
     </div>
+    <HomeView v-if="loggedUser.length === 0" />
   </div>
 </template>
 
@@ -22,12 +23,15 @@
 import { computed, onMounted } from 'vue';
 import { mapActions, useStore } from 'vuex';
 import FileStarShip from '@/components/FileStarShip.vue';
+import HomeView from './HomeView.vue';
 
 export default {
   name: 'StarShips',
   components: {
-    FileStarShip
-  },
+    FileStarShip,
+    HomeView,
+    HomeView
+},
   setup() {
     // con esto tenemos acceso a nuestro Vuex
     const store = useStore()
@@ -38,8 +42,9 @@ export default {
     })
 
     // mapeamos el state para mostrar el array en el v-for
-    const naves = computed(() => store.state.naves)
-    return { naves }
+    const naves = computed(() => store.state.naves);
+    const loggedUser = computed(() => store.state.loggedUser);
+    return { naves, loggedUser }
   },
   methods: {
     ...mapActions(['recarga'])

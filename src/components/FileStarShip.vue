@@ -1,5 +1,5 @@
 <template>
-  <div class="container text-white mt-3 text-center text-uppercase">
+  <div class="container text-white mt-3 text-center text-uppercase" v-if="loggedUser.length != 0">
 
     <h1>{{ nave.name }}</h1>
     <img :src="obtenerImagenNave" class="img-nave" @error="imageLoadOnError">
@@ -41,16 +41,29 @@
       </div>
     </div>
     <!-- <pre class="text-lowercase">{{ nave }}</pre> -->
+    <HomeView v-if="loggedUser.length === 0" />
   </div>
 </template>
 
 <script>
+import { useStore } from 'vuex';
+import { computed } from 'vue';
 import StarShips from '@/views/StarShips.vue';
+import HomeView from '@/views/HomeView.vue';
 
 export default {
   name: 'FileStarShip',
   components: {
-    StarShips
+    StarShips,
+    HomeView
+  },
+  setup() {
+        // con esto tenemos acceso a nuestro Vuex
+        const store = useStore()
+
+        // mapeamos el state
+        const loggedUser = computed(() => store.state.loggedUser);
+        return { loggedUser }
   },
   data() {
     return {

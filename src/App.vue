@@ -15,7 +15,7 @@
     </div>
     <nav>
       <router-link to="/" class="link">Home</router-link>
-      <router-link to="/starships" class="link">Starships</router-link>
+      <router-link to="/starships" class="link" v-if="loggedUser.length != 0">Starships</router-link>
     </nav>
     <router-view />
     <Login />
@@ -40,6 +40,7 @@ export default {
 
     // mapeamos el state
     const arrayUser = computed(() => store.state.arrayUser);
+    const loggedUser = computed(() => store.state.loggedUser);
 
     // guardamos todo el contenido de localstorage en un array del store
     for (let key in localStorage) {
@@ -49,7 +50,7 @@ export default {
       store.state.arrayUser.push(JSON.parse(localStorage.getItem(key)));
     }
     console.log("Contenido localstorage en objeto: ", store.state.arrayUser)
-    return { arrayUser }
+    return { arrayUser, loggedUser }
   }
 }
 </script>
