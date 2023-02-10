@@ -1,7 +1,7 @@
 <template>
   <div class="container text-light">
     <div class="row justify-content-center">
-      <div v-for="nave of naves" :key="nave.name" class="bg-grey m-2 p-2 col-8">
+      <div v-for="nave of naves" :key="nave.name" class="bg-grey m-2 p-2 col-8 text-start">
         <router-link :to="{ name: 'filestarship', params: { id: JSON.stringify(nave) } }"
           class="dato-nave text-decoration-none">
           {{ nave.name.toUpperCase() }}

@@ -1,13 +1,58 @@
 <template>
-  <div class="text-center">
-    <img alt="Star Wars logo" class="logo" src="@/assets/logo-starwars.png">
+  <div class="container-fluid text-center">
+    <div class="align-items-center position-relative">
+      <img alt="Star Wars logo" class="logo" src="@/assets/logo-starwars.png">
+      <div class="position-absolute top-50 end-0 translate-middle-y">
+        <button type="button" class="btn btn-outline-light text-uppercase border border-0" data-bs-toggle="modal"
+          data-bs-target="#loginModal">
+          Login
+        </button>
+        <button type="button" class="btn btn-outline-light text-uppercase border border-0" data-bs-toggle="modal"
+          data-bs-target="#signupModal">
+          SignUp
+        </button>
+      </div>
+    </div>
+    <nav>
+      <router-link to="/" class="link">Home</router-link>
+      <router-link to="/starships" class="link">Starships</router-link>
+    </nav>
+    <router-view />
+    <Login />
+    <SignUp />
   </div>
-  <nav>
-    <router-link to="/" class="link">Home</router-link>
-    <router-link to="/starships" class="link">Starships</router-link>
-  </nav>
-  <router-view />
 </template>
+
+<script>
+import Login from './components/Login.vue';
+import SignUp from './components/SignUp.vue';
+import { useStore } from 'vuex';
+import { computed } from 'vue';
+
+export default {
+  components: {
+    Login,
+    SignUp
+  },
+  setup() {
+    // con esto tenemos acceso a nuestro Vuex
+    const store = useStore();
+
+    // mapeamos el state
+    const arrayUser = computed(() => store.state.arrayUser);
+
+    // guardamos todo el contenido de localstorage en un array del store
+    for (let key in localStorage) {
+      if (!localStorage.hasOwnProperty(key)) {
+        continue; // se salta claves como "setItem", "getItem" etc
+      }
+      store.state.arrayUser.push(JSON.parse(localStorage.getItem(key)));
+    }
+    console.log("Contenido localstorage en objeto: ", store.state.arrayUser)
+    return { arrayUser }
+  }
+}
+</script>
 
 <style>
 body {

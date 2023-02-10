@@ -3,9 +3,9 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     naves: [],
-    dataNau: []
-  },
-  getters: {
+    dataNau: [],
+    arrayUser: [],
+    loggedUser: []
   },
   mutations: {
     // sólo modifica el state
