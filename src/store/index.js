@@ -44,9 +44,7 @@ export default createStore({
     async getPilot({commit, state}, IdPilot) {
       try{
         const resPilot = await fetch(`https://swapi.dev/api/people/${IdPilot}`)
-        // const resPilot = await fetch(`https://swapi.dev/api/people/22`)
         state.dataPilot = await resPilot.json()
-        console.log("Pilot: ",state.dataPilot)
         commit('setDataPiloto', state.dataPilot)
       }catch(error){
         console.log(error)

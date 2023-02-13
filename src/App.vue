@@ -1,17 +1,33 @@
 <template>
-  <div class="container-fluid text-center">
-    <div class="align-items-center position-relative">
+  <div class="container-fluid text-center position-relative">
+    <div class="container-fluid position-absolute">
       <img alt="Star Wars logo" class="logo" src="@/assets/logo-starwars.png">
-      <div class="position-absolute top-50 end-0 translate-middle-y">
-        <button type="button" class="btn btn-outline-light text-uppercase border border-0" data-bs-toggle="modal"
-          data-bs-target="#loginModal">
-          Login
-        </button>
-        <button type="button" class="btn btn-outline-light text-uppercase border border-0" data-bs-toggle="modal"
-          data-bs-target="#signupModal">
-          SignUp
-        </button>
-      </div>
+    </div>
+    <div class="align-items-center position-relative menu">
+      <nav class="navbar navbar-expand-md bg-body-tertiary border border-0">
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <button type="button" class="btn btn-outline-light text-uppercase border border-0"
+                  data-bs-toggle="modal" data-bs-target="#loginModal">
+                  Login
+                </button>
+              </li>
+              <li class="nav-item">
+                <button type="button" class="btn btn-outline-light text-uppercase border border-0"
+                  data-bs-toggle="modal" data-bs-target="#signupModal">
+                  SignUp
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </div>
     <nav>
       <router-link to="/" class="link">Home</router-link>
@@ -67,6 +83,10 @@ body {
   padding: 0;
 }
 
+.menu {
+  height: 100px;
+}
+
 .logo {
   width: 200px;
   margin-top: 20px;
@@ -92,7 +112,7 @@ nav {
   padding-right: 30px;
   text-decoration: none;
   text-transform: uppercase;
-  color: #666666;
+  color: #8c8c8c;
 }
 
 .link:hover,
@@ -105,5 +125,16 @@ nav {
 
 .bg-grey {
   background-color: #151515cb;
+}
+
+.navbar-toggler-icon {
+  background-color: #fff;
+  filter: invert(100%);
+}
+
+@media (max-width: 766px) {
+  .navbar-collapse {
+    text-align: start;
+  }
 }
 </style>

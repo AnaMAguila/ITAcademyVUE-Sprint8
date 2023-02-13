@@ -23,13 +23,12 @@
 import { computed, onMounted } from 'vue';
 import { mapActions, useStore } from 'vuex';
 import FileStarShip from '@/components/FileStarShip.vue';
-import HomeView from './HomeView.vue';
+import HomeView from '@/views/HomeView.vue';
 
 export default {
   name: 'StarShips',
   components: {
     FileStarShip,
-    HomeView,
     HomeView
 },
   setup() {
@@ -56,7 +55,7 @@ export default {
 .dato-nave {
   display: block;
   margin: 10px;
-  color: #666666
+  color: #8c8c8c
 }
 
 .dato-nave:hover {
