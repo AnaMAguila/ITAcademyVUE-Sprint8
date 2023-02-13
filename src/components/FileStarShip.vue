@@ -1,6 +1,5 @@
 <template>
   <div class="container text-white mt-3 text-center text-uppercase" v-if="loggedUser.length != 0">
-
     <h1>{{ nave.name }}</h1>
     <img :src="obtenerImagenNave" class="img-nave" @error="imageLoadOnError">
 
@@ -40,6 +39,20 @@
         </ul>
       </div>
     </div>
+    <div class="row text-start mt-2">
+      <div class="col">
+        <ul>
+          <li><span class="text-white">PILOTS: </span>
+            <span class="text-secondary text-lowercase" v-for="pilot of obtenerIdPiloto" :key="pilot">
+              <router-link :to="{ name: 'filecharacter', params: { id: JSON.stringify(pilot) } }">
+                <img :src="'https://starwars-visualguide.com/assets/img/characters/' + pilot + '.jpg'"
+                  class="miniatura-piloto">
+              </router-link>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
     <!-- <pre class="text-lowercase">{{ nave }}</pre> -->
     <HomeView v-if="loggedUser.length === 0" />
   </div>
@@ -58,12 +71,12 @@ export default {
     HomeView
   },
   setup() {
-        // con esto tenemos acceso a nuestro Vuex
-        const store = useStore()
+    // con esto tenemos acceso a nuestro Vuex
+    const store = useStore()
 
-        // mapeamos el state
-        const loggedUser = computed(() => store.state.loggedUser);
-        return { loggedUser }
+    // mapeamos el state
+    const loggedUser = computed(() => store.state.loggedUser);
+    return { loggedUser }
   },
   data() {
     return {
@@ -73,19 +86,23 @@ export default {
   computed: {
     // con esto obtengo la id de la nave
     obtenerIdNave() {
-      let array = this.nave.url.split('/')
+      let array = this.nave.url.split('/');
       const naveId = JSON.parse(array.slice(-2, -1));
-      return naveId
+      return naveId;
     },
     obtenerImagenNave() {
       let img = new Image();
       img.src = 'https://starwars-visualguide.com/assets/img/starships/' + this.obtenerIdNave + '.jpg';
       return img.src;
+    },
+    obtenerIdPiloto() {
+      let pilotoId = this.nave.pilots.map(element => JSON.parse(element.split('/').slice(-2, -1)));
+      return pilotoId;
     }
   },
   methods: {
     imageLoadOnError(e) {
-      e.target.src = "https://starwars-visualguide.com/assets/img/big-placeholder.jpg"
+      e.target.src = "https://starwars-visualguide.com/assets/img/big-placeholder.jpg";
     }
   }
 }
@@ -102,6 +119,11 @@ li {
   border-bottom-width: 3px;
   border-bottom-color: #0048a0;
   margin-top: 20px;
+}
+
+.miniatura-piloto {
+  width: 70px;
+  padding: 5px;
 }
 
 @media (max-width: 1000px) {

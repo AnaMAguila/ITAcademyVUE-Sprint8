@@ -1,19 +1,20 @@
 import { createStore } from 'vuex'
 
 export default createStore({
-  state: {
+  state: { // poner variables y colecciones aquí
+    // naves es un array dónde se van concatenando los resultados al hacer View More
     naves: [],
     dataNau: [],
     arrayUser: [],
-    loggedUser: []
+    loggedUser: [],
+    dataPilot: []
   },
-  mutations: {
+  mutations: { // funciones síncronas para cambiar el estado e.j. put, edit, delete
     // sólo modifica el state
-    setNave(state, payload){
-      state.naves = state.naves.concat(payload)
-    }
+    setNave: (state, payload) => (state.naves = state.naves.concat(payload)),
+    setDataPiloto: (state, payload) => (state.dataPilot = payload)
   },
-  actions: {
+  actions: { // funciones asíncronas que puede llamar una o más mutaciones
     // para llamar al servidor o para crear mayor lógica
     async fetchData({commit, state}) {
       try{
@@ -37,6 +38,18 @@ export default createStore({
         }        
       }catch(error){
         console.log(error)  
+      }  
+    },
+
+    async getPilot({commit, state}, IdPilot) {
+      try{
+        const resPilot = await fetch(`https://swapi.dev/api/people/${IdPilot}`)
+        // const resPilot = await fetch(`https://swapi.dev/api/people/22`)
+        state.dataPilot = await resPilot.json()
+        console.log("Pilot: ",state.dataPilot)
+        commit('setDataPiloto', state.dataPilot)
+      }catch(error){
+        console.log(error)
       }  
     }
   }

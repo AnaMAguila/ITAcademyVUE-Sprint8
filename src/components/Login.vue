@@ -69,7 +69,7 @@ export default {
             // buscamos si existe este email y coincide la contraseña
             const foundEmail = this.arrayUser.find(element => element.email === this.email && element.password === this.password)
             
-            console.log("foundEmail: ", foundEmail);
+            console.log("Usuario conectado: ", foundEmail);
 
             if (foundEmail) {
                 // etiqueta que muestra que el email ya existe
